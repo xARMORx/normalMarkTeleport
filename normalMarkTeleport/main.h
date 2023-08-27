@@ -44,8 +44,9 @@ float FindGroundZForCoord(float x, float y) {
 
 void setPlayerPos(float x, float y, float z) {
     void* CPed = *(void**)(0xB6F5F0);
+    void* CVehicle = *(void**)((uint32_t)CPed + 0x58C);
     CVector position(x, y, z);
-    ((void(__thiscall*) (void*, CVector*))(0x4241C0))(CPed, &position);
+    ((void(__thiscall*) (void*, CVector*))(0x4241C0))(CVehicle == nullptr ? CPed : CVehicle, &position);
 }
 
 using CRadar__SetCoordBlipPrototype = int(__cdecl*)(eBlipType, float, float, float, int, eBlipDisplay);
